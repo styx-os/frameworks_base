@@ -1237,7 +1237,7 @@ public class NotificationPanelViewController extends PanelViewController {
         return !mQsTouchAboveFalsingThreshold;
     }
 
-    public float getQsExpansionFraction() {
+    private float getQsExpansionFraction() {
         return Math.min(
                 1f, (mQsExpansionHeight - mQsMinExpansionHeight) / (mQsMaxExpansionHeight
                         - mQsMinExpansionHeight));
@@ -2121,7 +2121,6 @@ public class NotificationPanelViewController extends PanelViewController {
             alpha *= mClockPositionResult.clockAlpha;
         }
         mNotificationStackScroller.setAlpha(alpha);
-        mStatusBar.updateDismissAllVisibility(true);
     }
 
     private float getFadeoutAlpha() {

@@ -1054,7 +1054,6 @@ public abstract class PanelViewController {
 
     public void setLaunchingNotification(boolean launchingNotification) {
         mLaunchingNotification = launchingNotification;
-        mStatusBar.updateDismissAllVisibility(false);
     }
 
     public void collapseWithDuration(int animationDuration) {
