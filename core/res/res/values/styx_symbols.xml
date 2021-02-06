@@ -40,4 +40,6 @@
     <!-- In-display Fingerprint -->
     <java-symbol type="bool" name="config_supportsInDisplayFingerprint" />
 
+    <!-- Screen recorder framerate limit -->
+    <java-symbol type="integer" name="config_screenRecorderMaxFramerate" />
 </resources>
