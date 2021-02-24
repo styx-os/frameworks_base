@@ -495,24 +495,16 @@ public class BatteryStatsHelper {
                 }
             }
         }
-        try {
-            Collections.sort(mMobilemsppList, new Comparator<BatterySipper>() {
-                @Override
-                public int compare(BatterySipper lhs, BatterySipper rhs) {
-                    return Double.compare(rhs.mobilemspp, lhs.mobilemspp);
-                }
-            });
-        } catch (Exception e) {
-          // nothing to do
-        }
+        Collections.sort(mMobilemsppList, new Comparator<BatterySipper>() {
+            @Override
+            public int compare(BatterySipper lhs, BatterySipper rhs) {
+                return Double.compare(rhs.mobilemspp, lhs.mobilemspp);
+            }
+        });
 
         processMiscUsage();
 
-        try {
-           Collections.sort(mUsageList);
-        } catch (Exception e) {
-          // nothing to do
-        }
+        Collections.sort(mUsageList);
 
         // At this point, we've sorted the list so we are guaranteed the max values are at the top.
         // We have only added real powers so far.
