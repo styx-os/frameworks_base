@@ -39,6 +39,8 @@ import android.widget.ImageView;
 import android.hardware.biometrics.BiometricSourceType;
 import android.hardware.fingerprint.FingerprintManager;
 
+import com.android.internal.util.custom.fod.FodUtils;
+
 import androidx.core.graphics.ColorUtils;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -82,6 +84,7 @@ public class KeyguardStatusView extends GridLayout implements
     private int mIconTopMarginWithHeader;
     private boolean mShowingHeader;
     private Context mContext;
+    private boolean mHasFod;
 
     private KeyguardUpdateMonitorCallback mInfoCallback = new KeyguardUpdateMonitorCallback() {
 
@@ -466,15 +469,19 @@ public class KeyguardStatusView extends GridLayout implements
 
     private void UpdateFPIcon() {
 		FingerprintManager fingerprintManager = (FingerprintManager) mContext.getSystemService(Context.FINGERPRINT_SERVICE);
+        	mHasFod = FodUtils.hasFodSupport(mContext);
 	        if (fingerprintManager == null) {
                         fpIcon.setVisibility(View.GONE);
-			Log.w ("FluidLSManager", "FP icon: FingerprintManager is null, falling back to Dont show icon");
+			Log.w ("StyxLSManager", "FP icon: FingerprintManager is null, falling back to Dont show icon");
 		} else if (!fingerprintManager.isHardwareDetected()) { 
 			fpIcon.setVisibility(View.GONE);
 			Log.w ("StyxLSManager", "FP icon: Fingerprint not detected, falling back to Dont show icon");
 		} else if (!fingerprintManager.hasEnrolledFingerprints()) { 
 			fpIcon.setVisibility(View.GONE);
 			Log.i ("StyxLSManager", "FP icon: fpcounter=0, Dont show icon");
+       		} else if (mHasFod) {
+            		fpIcon.setVisibility(View.GONE);
+            		Log.i("StyxLSManager", "FP icon: device has fingerprint-in-display,  Dont show icon");
 		} else if (fingerprintManager.hasEnrolledFingerprints()) { 
 			fpIcon.setVisibility(View.VISIBLE);
 			Log.i ("StyxLSManager", "FP icon: fpcounter=1, Show icon");
@@ -483,4 +490,3 @@ public class KeyguardStatusView extends GridLayout implements
 		}
     }
 }
-
