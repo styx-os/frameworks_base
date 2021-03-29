@@ -27,8 +27,6 @@
     <color name="edge_light_red">#ea4234</color>
     <color name="edge_light_yellow">#fbbc06</color>
 
-    <dimen name="vol_dot_spacer">4dp</dimen>
-
     <!-- Clear all notifications button -->
     <dimen name="dismiss_all_button_elevation">10dp</dimen>
     <dimen name="dismiss_all_button_height">55dp</dimen>
