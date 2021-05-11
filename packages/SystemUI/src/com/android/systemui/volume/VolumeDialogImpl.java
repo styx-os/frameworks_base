@@ -187,6 +187,7 @@ public class VolumeDialogImpl implements VolumeDialog,
     private View mODICaptionsTooltipView = null;
 
     private boolean mExpanded;
+    private boolean mLeftVolumeRocker;
 
     public VolumeDialogImpl(Context context) {
         mContext =
@@ -200,6 +201,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         mShowActiveStreamOnly = showActiveStreamOnly();
         mHasSeenODICaptionsTooltip =
                 Prefs.getBoolean(context, Prefs.Key.HAS_SEEN_ODI_CAPTIONS_TOOLTIP, false);
+        mLeftVolumeRocker = mContext.getResources().getBoolean(R.bool.config_audioPanelOnLeftSide);
     }
 
     @Override
@@ -227,8 +229,14 @@ public class VolumeDialogImpl implements VolumeDialog,
 
     private void initDialog() {
 
+        final int panelGravity;
+        
         // Gravitate various views left/right depending on panel placement setting.
-        final int panelGravity = Gravity.RIGHT;
+        if(!isAudioPanelOnLeftSide()){
+            panelGravity = Gravity.RIGHT;
+        } else{
+            panelGravity = Gravity.LEFT;
+        }
 
         mConfigurableTexts = new ConfigurableTexts(mContext);
         mHovering = false;
@@ -418,7 +426,11 @@ public class VolumeDialogImpl implements VolumeDialog,
         if (D.BUG) Slog.d(TAG, "Adding row for stream " + stream);
         VolumeRow row = new VolumeRow();
         initRow(row, stream, iconRes, iconMuteRes, important, defaultStream);
-        mDialogRowsView.addView(row.view);
+        if(!isAudioPanelOnLeftSide()){
+            mDialogRowsView.addView(row.view, 0);
+        } else {
+            mDialogRowsView.addView(row.view);
+        }
         mRows.add(row);
     }
 
@@ -429,6 +441,11 @@ public class VolumeDialogImpl implements VolumeDialog,
             initRow(row, row.stream, row.iconRes, row.iconMuteRes, row.important,
                     row.defaultStream);
             mDialogRowsView.addView(row.view);
+            if(!isAudioPanelOnLeftSide()){
+                mDialogRowsView.addView(row.view, 0);
+            } else {
+                mDialogRowsView.addView(row.view);
+            }
             updateVolumeRowH(row);
         }
     }
@@ -841,7 +858,7 @@ public class VolumeDialogImpl implements VolumeDialog,
 
         if (!mShowing && !mDialog.isShown()) {
             if (!isLandscape()) {
-                mDialogView.setTranslationX(mDialogView.getWidth() / 2.0f);
+                mDialogView.setTranslationX((mDialogView.getWidth() / 2.0f)*(isAudioPanelOnLeftSide() ? -1 : 1));
             }
             mDialogView.setAlpha(0);
             mDialogView.animate()
@@ -948,7 +965,7 @@ public class VolumeDialogImpl implements VolumeDialog,
                     tryToRemoveCaptionsTooltip();
                     mController.notifyVisible(false);
                 }, 50));
-        if (!isLandscape()) animator.translationX(mDialogView.getWidth() / 2.0f);
+        if (!isLandscape()) animator.translationX((mDialogView.getWidth() / 2.0f)*(isAudioPanelOnLeftSide() ? -1 : 1));
         animator.start();
         checkODICaptionsTooltip(true);
         synchronized (mSafetyWarningLock) {
@@ -1000,6 +1017,10 @@ public class VolumeDialogImpl implements VolumeDialog,
         }
 
         return false;
+    }
+
+   private boolean isAudioPanelOnLeftSide() {
+        return mLeftVolumeRocker;
     }
 
     private void updateRowsH(final VolumeRow activeRow) {
