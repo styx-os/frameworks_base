@@ -38,6 +38,8 @@
     <!-- Size of the FOD animation -->
     <dimen name="fod_animation_size">310dp</dimen>
 
+    <!-- Volume panel -->
+    <dimen name="volume_dialog_panel_transparent_padding_left">20dp</dimen>
     <!-- Quick Settings -->
     <dimen name="quick_settings_top_margin_media">4dp</dimen>
     <dimen name="quick_settings_top_margin_media_extra">10dp</dimen>
@@ -78,4 +80,5 @@
     <dimen name="right_tri_state_up_bottom_right_radius">0.0dip</dimen>
     <dimen name="right_tri_state_up_top_left_radius">24.0dip</dimen>
     <dimen name="right_tri_state_up_top_right_radius">24.0dip</dimen>
+
 </resources>
