@@ -847,6 +847,12 @@ public final class DefaultPermissionGrantPolicy {
             grantPermissionsToPackage(pm, themePickerPackage, userId, false /* ignoreSystemPackage */,
                     true /*whitelistRestrictedPermissions*/, STORAGE_PERMISSIONS);
         }
+
+        // ContactsProvider2
+        grantSystemFixedPermissionsToSystemPackage(pm,
+                getDefaultProviderAuthorityPackage("com.android.providers.contacts.ContactsProvider2", userId), userId,
+                CONTACTS_PERMISSIONS, STORAGE_PERMISSIONS);
+
     }
 
     private String getDefaultSystemHandlerActivityPackageForCategory(PackageManagerWrapper pm,
