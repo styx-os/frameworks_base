@@ -14,9 +14,7 @@
   <!-- Enable face auth only when swiping security view -->
   <bool name="config_faceAuthOnlyOnSecurityView">false</bool>
 
-    <!-- Allow devices override audio panel location to the left side -->
-    <bool name="config_audioPanelOnLeftSide">false</bool>
-
     <!-- Whether to show VoWiFi icon in the status bar -->
     <bool name="config_display_vowifi">true</bool>
-</resources> 
+
+</resources>
