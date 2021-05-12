@@ -67,8 +67,8 @@ public class QSCarrierGroupController {
             new NetworkController.SignalCallback() {
                 @Override
                 public void setMobileDataIndicators(NetworkController.IconState statusIcon,
-                        NetworkController.IconState qsIcon, int statusType, int qsType,
-                        boolean activityIn, boolean activityOut,
+                        NetworkContr	oller.IconState qsIcon, int statusType, int qsType,
+                        boolean activityIn, boolean activityOut, int stackedVoiceId,
                         CharSequence typeContentDescription,
                         CharSequence typeContentDescriptionHtml, CharSequence description,
                         boolean isWide, int subId, boolean roaming) {
