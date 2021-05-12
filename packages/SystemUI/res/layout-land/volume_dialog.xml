@@ -29,8 +29,6 @@
         android:minWidth="@dimen/volume_dialog_panel_width"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_gravity="right"
         android:background="@android:color/transparent"
         android:paddingRight="@dimen/volume_dialog_panel_transparent_padding_right"
         android:paddingTop="@dimen/volume_dialog_panel_transparent_padding"
@@ -61,7 +59,6 @@
             <include layout="@layout/volume_dnd_icon"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
-                     android:layout_marginRight="@dimen/volume_dialog_stream_padding"
                      android:layout_marginTop="6dp"/>
         </FrameLayout>
 
@@ -160,8 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/volume_tool_tip_right_margin"
-            android:layout_marginTop="@dimen/volume_tool_tip_top_margin"
-            android:layout_gravity="right"/>
+            android:layout_marginTop="@dimen/volume_tool_tip_top_margin"/>
 
     </FrameLayout>
 
